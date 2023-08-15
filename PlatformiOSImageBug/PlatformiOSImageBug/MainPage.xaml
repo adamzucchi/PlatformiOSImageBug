@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PlatformiOSImageBug.MainPage">
+
+    <Grid Padding="0"
+          Margin="0"
+          RowDefinitions="200,200"
+          ColumnDefinitions="*">
+            <Image Grid.Row="0"
+                   Grid.Column="0"
+                Source="dotnet_bot.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="200"
+                HorizontalOptions="Center" />
+
+            <Image Grid.Row="1"
+                   Grid.Column="0"
+                Source="myimage.png"
+                BackgroundColor="Red"
+                Aspect="AspectFill"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="200"
+                WidthRequest="200"
+                HorizontalOptions="Center" />
+        </Grid>
+</ContentPage>

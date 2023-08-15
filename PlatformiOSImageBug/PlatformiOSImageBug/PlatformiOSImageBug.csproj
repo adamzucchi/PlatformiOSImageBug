@@ -1,0 +1,122 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
+		<OutputType>Exe</OutputType>
+		<RootNamespace>PlatformiOSImageBug</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<!-- Display name -->
+		<ApplicationTitle>PlatformiOSImageBug</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.mycompany.myapp</ApplicationId>
+		<ApplicationIdGuid>c8592641-e6b2-4da2-a612-7cb1b8ca5789</ApplicationIdGuid>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
+	  <CreatePackage>false</CreatePackage>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
+	  <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <BundleAssemblies>false</BundleAssemblies>
+    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
+    <AndroidSupportedAbis>armeabi-v7a;arm64-v8a;x86_64;x86</AndroidSupportedAbis>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <MandroidI18n>Other</MandroidI18n>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\myimage.png" BaseSize="150,233" />
+		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Platforms\Android\Resources\drawable\myimage.png" />
+	  <None Remove="Platforms\Android\Resources\drawable-hdpi\myimage.png" />
+	  <None Remove="Platforms\Android\Resources\drawable-xhdpi\myimage.png" />
+	  <None Remove="Platforms\Android\Resources\drawable-xxhdpi\myimage.png" />
+	  <None Remove="Platforms\Android\Resources\drawable-xxxhdpi\myimage.png" />
+	  <None Remove="Platforms\iOS\Resources\" />
+	  <None Remove="Platforms\iOS\Resources\myimage.png" />
+	  <None Remove="Platforms\iOS\Resources\myimage%402x.png" />
+	  <None Remove="Platforms\iOS\Resources\myimage%403x.png" />
+	  <None Remove="Resources\Images\myimage.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <BundleResource Include="Platforms\iOS\Resources\myimage.png" />
+	  <BundleResource Include="Platforms\iOS\Resources\myimage%402x.png" />
+	  <BundleResource Include="Platforms\iOS\Resources\myimage%403x.png" />
+	  <BundleResource Include="Resources\Images\myimage.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Platforms\iOS\Resources\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable\myimage.png">
+	    <SubType></SubType>
+	    <Generator></Generator>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable-hdpi\myimage.png">
+	    <SubType></SubType>
+	    <Generator></Generator>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable-xhdpi\myimage.png">
+	    <SubType></SubType>
+	    <Generator></Generator>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable-xxhdpi\myimage.png">
+	    <SubType></SubType>
+	    <Generator></Generator>
+	  </AndroidResource>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable-xxxhdpi\myimage.png">
+	    <SubType></SubType>
+	    <Generator></Generator>
+	  </AndroidResource>
+	</ItemGroup>
+</Project>
