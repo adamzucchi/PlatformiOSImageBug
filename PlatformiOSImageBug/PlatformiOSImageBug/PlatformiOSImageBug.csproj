@@ -77,18 +77,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Platforms\Android\Resources\drawable\myimage.png" />
-	  <None Remove="Platforms\Android\Resources\drawable-hdpi\myimage.png" />
-	  <None Remove="Platforms\Android\Resources\drawable-xhdpi\myimage.png" />
-	  <None Remove="Platforms\Android\Resources\drawable-xxhdpi\myimage.png" />
-	  <None Remove="Platforms\Android\Resources\drawable-xxxhdpi\myimage.png" />
-	  <None Remove="Platforms\iOS\Resources\" />
-	  <None Remove="Platforms\iOS\Resources\myimage.png" />
-	  <None Remove="Platforms\iOS\Resources\myimage%402x.png" />
-	  <None Remove="Platforms\iOS\Resources\myimage%403x.png" />
-	  <None Remove="Resources\Images\myimage.png" />
-	</ItemGroup>
-	<ItemGroup>
 	  <BundleResource Include="Platforms\iOS\Resources\myimage.png" />
 	  <BundleResource Include="Platforms\iOS\Resources\myimage%402x.png" />
 	  <BundleResource Include="Platforms\iOS\Resources\myimage%403x.png" />
